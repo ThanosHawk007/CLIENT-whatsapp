@@ -1,0 +1,6 @@
+@media (max-width: 768px) {
+  .chatPageContainer {
+    flex-direction: column;
+    flex-wrap: wrap;
+  }
+}
