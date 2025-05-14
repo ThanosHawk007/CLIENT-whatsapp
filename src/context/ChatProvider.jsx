@@ -173,6 +173,17 @@ function ChatProvider({ children }) {
       debug: (str) => console.log(str),
       onConnect: () => {
         console.log("Connected to WebSocket");
+        
+        // Subscribe to all users list (sent after login/setup)
+       const allUsersSubscription = stompClient.subscribe(
+         "/user/queue/onlineUsers",
+         (message) => {
+           const usersConnected = JSON.parse(message.body);
+           console.log("/user/queue/onlineUsers");
+           console.log({ usersConnected });
+           setOnlineUsers(usersConnected);
+          }
+       ); 
 
         // Save socket client
         setSocket(stompClient);
@@ -203,16 +214,16 @@ function ChatProvider({ children }) {
       onConnect: () => {
         console.log("Connected to WebSocket");
 
-         // Subscribe to all users list (sent after login/setup)
+      // Subscribe to all users list (sent after login/setup)
        const allUsersSubscription = stompClient.subscribe(
          "/user/queue/onlineUsers",
          (message) => {
-          const usersConnected = JSON.parse(message.body);
-          console.log("/user/queue/onlineUsers");
-          console.log({ usersConnected });
-          setOnlineUsers(usersConnected);
-      }
-    );
+           const usersConnected = JSON.parse(message.body);
+           console.log("/user/queue/onlineUsers");
+           console.log({ usersConnected });
+           setOnlineUsers(usersConnected);
+          }
+       );
 
         // Save socket client
         setSocket(stompClient);
