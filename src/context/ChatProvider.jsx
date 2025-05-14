@@ -167,6 +167,8 @@ function ChatProvider({ children }) {
       connectHeaders: {
         Authorization: `Bearer ${tokenVal}`,
       },
+      heartbeatIncoming: 10000,  // ✅ Ping server every 10s
+      heartbeatOutgoing: 10000,  // ✅ Expect server ping every 10s
       reconnectDelay: 5000,
       debug: (str) => console.log(str),
       onConnect: () => {
@@ -194,8 +196,8 @@ function ChatProvider({ children }) {
       connectHeaders: {
         Authorization: `Bearer ${token}`,
       },
-       heartbeatIncoming: 0,
-       heartbeatOutgoing: 0,
+      heartbeatIncoming: 10000,  // ✅ Ping server every 10s
+      heartbeatOutgoing: 10000,  // ✅ Expect server ping every 10s
       reconnectDelay: 5000,
       debug: (str) => console.log(str),
       onConnect: () => {
