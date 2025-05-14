@@ -194,6 +194,8 @@ function ChatProvider({ children }) {
       connectHeaders: {
         Authorization: `Bearer ${token}`,
       },
+       heartbeatIncoming: 0,
+       heartbeatOutgoing: 0,
       reconnectDelay: 5000,
       debug: (str) => console.log(str),
       onConnect: () => {
