@@ -113,6 +113,17 @@ function MyChats() {
 
     if (!isSocketReady || !user?.id) return;
 
+    // Subscribe to all users list (sent after login/setup)
+       const allUsersSubscription = socket.subscribe(
+         "/user/queue/onlineUsers",
+         (message) => {
+           const usersConnected = JSON.parse(message.body);
+           console.log("/user/queue/onlineUsers");
+           console.log({ usersConnected });
+           setOnlineUsers(usersConnected);
+          }
+       );
+
     // Subscribe to user online notification
     const userOnlineSubscription = socket.subscribe(
       "/topic/user/online",
